@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useState } from "react";
 import { ListItemCarStyled } from "./ListItemCarStyled";
 import Button from "../../Components/Button/Button";
-
-import { createCarSchema, type CreateCarData } from "../../schemas/carSchema";
 import { createCar } from "../../services/carService";
 
 function ListItemCar({
@@ -23,6 +18,8 @@ function ListItemCar({
   const [serverError, setServerError] = useState("");
   const [quantity, setQuantity] = useState(0);
 
+  const [price, setPrice] = useState((averagePrice * 5.14).toFixed(2));
+
   function handleMinus() {
     if (quantity > 0) {
       setQuantity(quantity - 1);
@@ -33,24 +30,42 @@ function ListItemCar({
     setQuantity(quantity + 1);
   }
 
-  const {
-    register: registerCar,
-    handleSubmit: handleSubmitCar,
-    formState: { errors: errorsCar },
-  } = useForm<CreateCarData>({
-    resolver: zodResolver(createCarSchema),
-  });
-
-  async function inHandleSubmit(data: CreateCarData) {
+  async function inHandleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     setServerError("");
 
+    const bodyCarro = {
+      toyNumber,
+      name,
+      series,
+      year,
+      averagePrice,
+      imageUrl,
+      isTh: isTh || false,
+      isSth: isSth || false,
+    };
+
+    const bodyColecao = {
+      toyNumber,
+      quantity,
+      price: Number((price / 5.14).toFixed(2)),
+    };
+
+    console.log("Body 1 (Carro):", bodyCarro);
+    console.log("Body 2 (Coleção):", bodyColecao);
+
     try {
-      const response = await createCar(data);
-      console.log(response);
+      // Primeira requisição
+      // const responseCar = await createCar(bodyCarro);
+
+      // Segunda requisição (Exemplo)
+      // const responseCollection = await addToCollection(bodyColecao);
+
+      console.log("Sucesso! As duas requisições foram feitas.");
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message ||
-        "Erro ao criar o carro ou criar collection";
+        "Erro ao criar o carro ou adicionar na coleção";
       setServerError(errorMessage);
       console.error(error);
     }
@@ -58,9 +73,9 @@ function ListItemCar({
 
   return (
     <ListItemCarStyled>
-      <form onSubmit={handleSubmitCar(inHandleSubmit)}>
+      <form onSubmit={inHandleSubmit}>
         <div id="imgCar">
-          <img src={imageUrl} />
+          <img src={imageUrl} alt={name} />
         </div>
 
         <div id="name_quantity">
@@ -69,6 +84,7 @@ function ListItemCar({
 
           <div>
             <button
+              type="button"
               onClick={handleMinus}
               id="minus"
               style={{
@@ -82,6 +98,7 @@ function ListItemCar({
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
             <button
+              type="button"
               onClick={handlePlus}
               id="plus"
               style={{
@@ -96,8 +113,9 @@ function ListItemCar({
             <p>R$</p>
             <input
               type="number"
-              placeholder={(averagePrice * 5.14).toFixed(2)}
-              value={(averagePrice * 5.14).toFixed(2)}
+              step="0.01"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
 
