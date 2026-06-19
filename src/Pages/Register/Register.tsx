@@ -4,40 +4,45 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import { signinSchema, type SigninData } from "../../schemas/signinSchema";
-import { signin } from "../../services/userService";
+import { signupSchema, type SignupData } from "../../schemas/signupSchema";
+import { signup } from "../../services/userService";
 import {
   RegisterStyled,
   RegisterDivStyled,
   RegisterFormDivStyled,
-} from "./LoginStyled";
+} from "../Login/LoginStyled";
 
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
 
   const {
-    register: registerSignin,
-    handleSubmit: handleSubmitSignin,
-    formState: { errors: errorsSignin },
-  } = useForm<SigninData>({
-    resolver: zodResolver(signinSchema),
+    register: registerSignup,
+    handleSubmit: handleSubmitSignup,
+    formState: {errors: errorsSignup},
+  } = useForm<SignupData>({
+    resolver: zodResolver(signupSchema),
   });
 
-  async function inHandleSubmit(data: SigninData) {
+  async function inHandleSubmit(data: SignupData) {
     setServerError("");
+    console.log(data);
 
     try {
-      const response = await signin(data);
-      Cookies.set("token", response.data.access_token, { expires: 1 });
+        const response = await signup(data);
 
-      navigate("/home");
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || "Erro ao fazer login.";
+        console.log(response);
+
+        if (response.status === 201){
+            navigate("/");
+        }
+
+    }catch(error: any){
+        const errorMessage =
+        error.response?.data?.message || "Erro ao fazer o cadastro.";
       setServerError(errorMessage);
       console.error(error);
     }
@@ -55,24 +60,27 @@ function Login() {
         <img src="car_register.jpg" />
 
         <RegisterFormDivStyled>
-          <h2>Entrar</h2>
+          <h2>Cadastrar</h2>
 
-          <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
+          <form onSubmit={handleSubmitSignup(inHandleSubmit)}>
+            <div>
+              <p className="inputTitle">Nome:</p>
+              <Input
+                type="text"
+                placeholder="Nome"
+                name="name"
+                register={registerSignup}
+              />
+            </div>
+
             <div>
               <p className="inputTitle">Email:</p>
               <Input
                 type="text"
                 placeholder="example@example.com"
                 name="email"
-                register={registerSignin}
+                register={registerSignup}
               />
-              {errorsSignin.email && (
-                <span
-                  style={{ color: "red", display: "block", fontSize: "12px" }}
-                >
-                  {errorsSignin.email.message}
-                </span>
-              )}
             </div>
 
             <div>
@@ -81,22 +89,15 @@ function Login() {
                 type="password"
                 placeholder="••••••••"
                 name="password"
-                register={registerSignin}
+                register={registerSignup}
               />
-              {errorsSignin.password && (
-                <span
-                  style={{ color: "red", display: "block", fontSize: "12px" }}
-                >
-                  {errorsSignin.password.message}
-                </span>
-              )}
             </div>
 
             <div>
               <p id="navigate_register">
-                Não possui uma conta? <a href="/signup">Clique aqui</a> para criar.
+                Já possui uma conta? <a href="/">Clique aqui</a> para entrar .
               </p>
-              <Button type="submit" name="Entrar" />
+              <Button type="submit" name="Cadastrar" />
             </div>
           </form>
         </RegisterFormDivStyled>
@@ -105,4 +106,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
