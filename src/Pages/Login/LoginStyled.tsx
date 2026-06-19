@@ -32,7 +32,7 @@ export const RegisterDivStyled = styled.div`
 export const RegisterFormDivStyled = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;  
   justify-content: center;
 
   width: 720px;
