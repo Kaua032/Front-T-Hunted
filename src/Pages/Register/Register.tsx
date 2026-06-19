@@ -29,12 +29,9 @@ function Register() {
 
   async function inHandleSubmit(data: SignupData) {
     setServerError("");
-    console.log(data);
 
     try {
         const response = await signup(data);
-
-        console.log(response);
 
         if (response.status === 201){
             navigate("/");
