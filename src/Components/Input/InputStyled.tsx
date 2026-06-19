@@ -10,7 +10,7 @@ export const InputStyled = styled.input`
 
     &::placeholder{
         font-family: Roboto;
-        color: #5E5D5D;
+        color: #D9D9D9;
         font-size: 12px;
         font-weight: 300;
     }

@@ -13,6 +13,7 @@ import {
 } from "./LoginStyled";
 
 import Input from "../../Components/Input/Input";
+import Button from "../../Components/Button/Button";
 
 function Login() {
   const navigate = useNavigate();
@@ -77,9 +78,9 @@ function Login() {
             <div>
               <p className="inputTitle">Senha:</p>
               <Input
-                type="text"
+                type="password"
                 placeholder="••••••••"
-                name="email"
+                name="password"
                 register={registerSignin}
               />
               {errorsSignin.password && (
@@ -92,10 +93,10 @@ function Login() {
             </div>
 
             <div>
-              <p id="">
-                Náo possuí uma conta? <a href="">Clique aqui</a> para criar.
+              <p id="navigate_register">
+                Náo possuí uma conta? <a href="/signup">Clique aqui</a> para criar.
               </p>
-              <button type="submit">Entrar</button>
+              <Button type="submit" name="Entrar" />
             </div>
           </form>
         </RegisterFormDivStyled>
