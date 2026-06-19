@@ -7,3 +7,9 @@ export function signin(data) {
 
     return response;
 }
+
+export function signup(data) {
+    const response = axios.post(`${baseURL}/users`, data);
+
+    return response;
+}

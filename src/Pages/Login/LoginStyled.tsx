@@ -66,6 +66,7 @@ export const RegisterFormDivStyled = styled.div`
 
   form div #navigate_register {
     margin-top: 10px;
+    margin-bottom: 5px;
 
     color: #5E5D5D;
     font-weight: 600;
