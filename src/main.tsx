@@ -4,18 +4,15 @@ import { GlobalStyled } from "./GlobalStyled.jsx";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import App from './App.tsx';
+import Login from './Pages/Login/Login.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <></>,
+    element: <Login />,
   },
   {
     path: "/home",
-    element: <></>,
-  },
-  {
-    path: "/teachers",
     element: <></>,
   },
 ]);
@@ -23,5 +20,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyled />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
