@@ -33,7 +33,28 @@ export const RegisterFormDivStyled = styled.div`
 
     width: 720px;
 
+    h2 {
+        color: #5E5D5D;
+        font-size: 32px;
+        font-weight: 600;
+    }
+
     form{
+        display: flex;
+        flex-direction: column;
+
         width: 300px;
+    }
+
+    form .inputTitle {
+        color: #5E5D5D;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    form div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 `

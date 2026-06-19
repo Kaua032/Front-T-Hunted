@@ -6,7 +6,13 @@ import Cookies from "js-cookie";
 
 import { signinSchema, type SigninData } from "../../schemas/signinSchema";
 import { signin } from "../../services/userService";
-import { RegisterStyled, RegisterDivStyled, RegisterFormDivStyled } from "./LoginStyled";
+import {
+  RegisterStyled,
+  RegisterDivStyled,
+  RegisterFormDivStyled,
+} from "./LoginStyled";
+
+import Input from "../../Components/Input/Input";
 
 function Login() {
   const navigate = useNavigate();
@@ -51,11 +57,13 @@ function Login() {
           <h2>Entrar</h2>
 
           <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
-            <div style={{ marginBottom: "10px" }}>
-              <input
+            <div>
+              <p className="inputTitle">Email:</p>
+              <Input
                 type="text"
-                placeholder="E-mail"
-                {...registerSignin("email")}
+                placeholder="example@example.com"
+                name="email"
+                register={registerSignin}
               />
               {errorsSignin.email && (
                 <span
@@ -66,11 +74,13 @@ function Login() {
               )}
             </div>
 
-            <div style={{ marginBottom: "10px" }}>
-              <input
-                type="password"
-                placeholder="Senha"
-                {...registerSignin("password")}
+            <div>
+              <p className="inputTitle">Senha:</p>
+              <Input
+                type="text"
+                placeholder="••••••••"
+                name="email"
+                register={registerSignin}
               />
               {errorsSignin.password && (
                 <span
@@ -80,9 +90,13 @@ function Login() {
                 </span>
               )}
             </div>
-            
-            <p>Náo possuí uma conta? <a href="">Clique aqui</a> para criar.</p>
-            <button type="submit">Entrar</button>
+
+            <div>
+              <p id="">
+                Náo possuí uma conta? <a href="">Clique aqui</a> para criar.
+              </p>
+              <button type="submit">Entrar</button>
+            </div>
           </form>
         </RegisterFormDivStyled>
       </RegisterDivStyled>
