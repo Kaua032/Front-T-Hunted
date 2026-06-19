@@ -4,12 +4,16 @@ export const ListItemCarStyled = styled.div`
   width: 500px;
   height: 100px;
 
-  display: flex;
-
   background-color: #fff;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   border-radius: 10px;
+
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
   #imgCar {
     width: 100px;
@@ -45,7 +49,62 @@ export const ListItemCarStyled = styled.div`
     font-weight: 500;
   }
 
-  #price_add p{
-    
+  #name_quantity input {
+    width: 40px;
+    font-size: 14px;
+    font-weight: 500;
+
+    border: none;
+
+    text-align: center;
+
+    color: #5e5d5d;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  #name_quantity input::-webkit-outer-spin-button,
+  #name_quantity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  #name_quantity div {
+    display: flex;
+  }
+
+  #name_quantity div button {
+    border: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 0;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  #price_add div {
+    display: flex;
+  }
+  #price_add div input {
+    min-width: 100px;
+    border: none;
+
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  #price_add div input::-webkit-outer-spin-button,
+  #price_add div input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  #price_add div input,
+  #price_add div p {
+    color: #5e5d5d;
+    font-size: 24px;
+    font-weight: 600;
   }
 `;

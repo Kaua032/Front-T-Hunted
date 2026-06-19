@@ -21,6 +21,17 @@ function ListItemCar({
   existsDatabase,
 }) {
   const [serverError, setServerError] = useState("");
+  const [quantity, setQuantity] = useState(0);
+
+  function handleMinus() {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  function handlePlus() {
+    setQuantity(quantity + 1);
+  }
 
   const {
     register: registerCar,
@@ -47,17 +58,49 @@ function ListItemCar({
 
   return (
     <ListItemCarStyled>
-      <form>
+      <form onSubmit={handleSubmitCar(inHandleSubmit)}>
         <div id="imgCar">
           <img src={imageUrl} />
         </div>
+
         <div id="name_quantity">
           <h3>{name}</h3>
           <p>{toyNumber}</p>
-          <input />
+
+          <div>
+            <button
+              onClick={handleMinus}
+              id="minus"
+              style={{
+                background: "url('./Minus_quantity.png')",
+              }}
+            />
+            <input
+              type="number"
+              name="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+            />
+            <button
+              onClick={handlePlus}
+              id="plus"
+              style={{
+                background: "url('./Plus_quantity.png')",
+              }}
+            />
+          </div>
         </div>
+
         <div id="price_add">
-          <p>R${(averagePrice * 5.14).toFixed(2)}</p>
+          <div>
+            <p>R$</p>
+            <input
+              type="number"
+              placeholder={(averagePrice * 5.14).toFixed(2)}
+              value={(averagePrice * 5.14).toFixed(2)}
+            />
+          </div>
+
           <Button
             type="submit"
             name=""
