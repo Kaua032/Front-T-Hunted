@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { signinSchema, type SigninData } from "../../schemas/signinSchema";
@@ -94,7 +94,7 @@ function Login() {
 
             <div>
               <p id="navigate_register">
-                Não possui uma conta? <a href="/signup">Clique aqui</a> para criar.
+                Não possui uma conta? <Link to="/signup">Clique aqui</Link> para criar.
               </p>
               <Button type="submit" name="Entrar" />
             </div>

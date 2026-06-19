@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { signupSchema, type SignupData } from "../../schemas/signupSchema";
@@ -92,7 +92,7 @@ function Register() {
 
             <div>
               <p id="navigate_register">
-                Já possui uma conta? <a href="/">Clique aqui</a> para entrar .
+                Já possui uma conta? <Link to="/">Clique aqui</Link> para entrar .
               </p>
               <Button type="submit" name="Cadastrar" />
             </div>
