@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../../Components/Header/Header";
 import { BackgroundHomeStyled } from "./HomeStyled";
+import ListItemCar from "../../Components/ListItemCar/ListItemCar";
 
 export interface CarData {
   id?: string;
@@ -18,9 +19,7 @@ function Home() {
   return (
     <BackgroundHomeStyled>
       <Header onCarFound={setSearchedCar} />
-      <h1>Home</h1>
-
-      {console.log(searchedCar)}
+      <div id="results">{searchedCar && <ListItemCar {...searchedCar} />}</div>
     </BackgroundHomeStyled>
   );
 }
