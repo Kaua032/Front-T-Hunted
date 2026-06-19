@@ -34,32 +34,28 @@ function ListItemCar({
     e.preventDefault();
     setServerError("");
 
-    const bodyCarro = {
+    const bodyCar = {
       toyNumber,
       name,
       series,
       year,
-      averagePrice,
       imageUrl,
       isTh: isTh || false,
       isSth: isSth || false,
     };
 
-    const bodyColecao = {
+    const bodyCollection = {
       toyNumber,
       quantity,
-      price: Number((price / 5.14).toFixed(2)),
+      purchase_price: Number((price / 5.14).toFixed(2)),
     };
 
-    console.log("Body 1 (Carro):", bodyCarro);
-    console.log("Body 2 (Coleção):", bodyColecao);
+    console.log("Body 1 (Carro):", bodyCar);
+    console.log("Body 2 (Coleção):", bodyCollection);
 
     try {
-      // Primeira requisição
-      // const responseCar = await createCar(bodyCarro);
-
-      // Segunda requisição (Exemplo)
-      // const responseCollection = await addToCollection(bodyColecao);
+      const responseCar = await createCar(bodyCar);
+      console.log(responseCar);
 
       console.log("Sucesso! As duas requisições foram feitas.");
     } catch (error: any) {
