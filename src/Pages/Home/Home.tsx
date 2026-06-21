@@ -69,43 +69,62 @@ function Home() {
 
       {!searchedCar && (
         <div id="your_collection">
-          <p>Sua coleção:</p>
+          <h2>Sua coleção:</h2>
 
           <div id="cards">
-            <div id="total_cust">
-              <div>
-                <img src="" alt="" />
-                <p>Custo Total:</p>
-              </div>
-              <p>R$ {totalCost.toFixed(2).replace(".", ",")}</p>
-            </div>
-
-            <div id="average_price">
-              <div>
-                <img src="" alt="" />
-                <p>Valor de Mercado:</p>
-              </div>
-              <p>R$ {marketValue.toFixed(2).replace(".", ",")}</p>
-            </div>
-
-            <div id="rarest_piece">
-              <div>
-                <img src="" alt="" />
-                <p>Peça mais valiosa:</p>
-              </div>
-              <div>
-                <img src="" alt="" />
-                <p>
-                  {rarestPiece
-                    ? `R$ ${(Number(rarestPiece.car.averagePrice) * COTACAO_DOLAR).toFixed(2).replace(".", ",")}`
-                    : "R$ 0,00"}
+            <div className="cards" id="total_cust">
+              <div className="border_card"></div>
+              <div className="card_layout_2">
+                <div className="title_card">
+                  <img style={{ height: "44px" }} src="./wallet.png" alt="" />
+                  <p>Custo Total:</p>
+                </div>
+                <p className="card_value">
+                  R$ {totalCost.toFixed(2).replace(".", ",")}
                 </p>
+              </div>
+            </div>
+
+            <div className="cards" id="average_price">
+              <div className="border_card"></div>
+              <div className="card_layout_2">
+                <div className="title_card">
+                  <img style={{ height: "50px" }} src="./grafico.png" alt="" />
+                  <p>Valor de Mercado:</p>
+                </div>
+                <p className="card_value">
+                  R$ {marketValue.toFixed(2).replace(".", ",")}
+                </p>
+              </div>
+            </div>
+
+            <div className="cards" id="rarest_piece">
+              <div className="border_card"></div>
+              <div className="card_layout_2">
+                <div className="title_card">
+                  <img style={{ height: "54px" }} src="rare.png" alt="" />
+                  <p>Peça mais valiosa:</p>
+                </div>
+                <div id="part2_rare_piece">
+                  {rarestPiece && (
+                    <img
+                      src={rarestPiece.car.imageUrl}
+                      alt={rarestPiece.car.name}
+                    />
+                  )}
+
+                  <p className="card_value">
+                    {rarestPiece
+                      ? `R$ ${(Number(rarestPiece.car.averagePrice) * COTACAO_DOLAR).toFixed(2).replace(".", ",")}`
+                      : "R$ 0,00"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div id="collection_layout">
-            <div id="choose_layout">
+            <div id="choose_layout_collection">
               <ButtonChooseLayout
                 type="button"
                 $mode="list"
@@ -120,7 +139,7 @@ function Home() {
               />
             </div>
 
-            <div id="collection">
+            <div id="collection" className={layoutMode}>
               {myCollection.map((item) =>
                 layoutMode === "list" ? (
                   <ListItemCarCollection
