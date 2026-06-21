@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Button from "../../Components/Button/Button";
+import { GridItemcarStyled } from "./GridItemCarStyled";
 
 import { createCar, searchCarByInfo } from "../../services/carService";
 import { createCollection } from "../../services/collectionService";
@@ -86,8 +87,73 @@ function GridItemCar({
     }
   }
 
-  return <h4>Test Card</h4>
-}
+  return (
+    <GridItemcarStyled>
+      <form onSubmit={inHandleSubmit}>
+        <div id="imgCar">
+          <img src={imageUrl} alt={name} />
+        </div>
 
+        <div id="layout_card">
+          <div id="name_quantity">
+            <h3>{name.length > 20 ? `${name.substring(0, 20)}...` : name}</h3>
+            <p>{toyNumber}</p>
+
+            <div>
+              <button
+                type="button"
+                onClick={handleMinus}
+                id="minus"
+                style={{
+                  background: "url('./Minus_quantity.png')",
+                }}
+              />
+              <input
+                type="number"
+                name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+              <button
+                type="button"
+                onClick={handlePlus}
+                id="plus"
+                style={{
+                  background: "url('./Plus_quantity.png')",
+                }}
+              />
+            </div>
+          </div>
+
+          <div id="price_add">
+            <div>
+              <p>R$</p>
+              <input
+                type="number"
+                step="0.01"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                style={{
+                  width: `${Math.max(String(price).length, 4)}ch`,
+                }}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              name=""
+              style={{
+                background: "url('./Plus.png')",
+                width: "20px",
+                height: "20px",
+                borderRadius: "0",
+              }}
+            />
+          </div>
+        </div>
+      </form>
+    </GridItemcarStyled>
+  );
+}
 
 export default GridItemCar;

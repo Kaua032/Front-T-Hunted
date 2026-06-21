@@ -11,6 +11,18 @@ export const BackgroundHomeStyled = styled.div`
 
   #results_layout{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #results_layout #chosse_layout {
+    width: 650px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    margin-top: 50px;
+    margin-bottom: 30px;
   }
 
   #results {
