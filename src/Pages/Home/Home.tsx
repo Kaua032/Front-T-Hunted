@@ -8,6 +8,7 @@ import GridItemCar from "../../Components/GridItemCar/GridItemCar";
 import GridItemCarCollection from "../../Components/GridItemCarCollection/GridItemCarCollection";
 
 import { getCollection } from "../../services/collectionService";
+import ListItemCarCollection from "../../Components/ListItemCarCollection/ListItemCarCollection";
 
 export interface CarData {
   id?: string;
@@ -122,7 +123,7 @@ function Home() {
             <div id="collection">
               {myCollection.map((item) =>
                 layoutMode === "list" ? (
-                  <ListItemCar
+                  <ListItemCarCollection
                     key={item.id}
                     {...item.car}
                     purchase_price={item.purchase_price}
