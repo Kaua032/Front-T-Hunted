@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { HeaderStyled, SearchContainerStyled } from "./HeaderStyled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { searchCar } from "../../services/carService";
 
 import Cookies from "js-cookie";
@@ -15,6 +15,8 @@ function Header({ onCarFound }: HeaderProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [userName, setUserName] = useState("Profile");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (searchTerm.trim() === "") {
@@ -47,6 +49,11 @@ function Header({ onCarFound }: HeaderProps) {
     }
   }, []);
 
+  function handleLogout() {
+    Cookies.remove("token");
+    navigate("/");
+  }
+
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
   }
@@ -71,6 +78,7 @@ function Header({ onCarFound }: HeaderProps) {
       <div className="profile-container">
         <p>{userName}</p>
         <img src="Profile.png" alt="Foto de perfil" />
+        <button id="logout" onClick={handleLogout}></button>
       </div>
     </HeaderStyled>
   );

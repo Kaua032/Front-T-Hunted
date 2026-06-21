@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Header from "../../Components/Header/Header";
 import { BackgroundHomeStyled, ButtonChooseLayout } from "./HomeStyled";
 
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
 import ListItemCar from "../../Components/ListItemCar/ListItemCar";
 import GridItemCar from "../../Components/GridItemCar/GridItemCar";
 
@@ -28,7 +31,16 @@ function Home() {
 
   const [myCollection, setMyCollection] = useState<any[]>([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      navigate("/");
+      return;
+    }
+
     async function loadMyCollection() {
       try {
         const response = await getCollection();
@@ -182,15 +194,9 @@ function Home() {
 
           <div id="results">
             {layoutMode === "list" ? (
-              <ListItemCar
-                key={searchedCar.id}
-                {...searchedCar}
-              />
+              <ListItemCar key={searchedCar.id} {...searchedCar} />
             ) : (
-              <GridItemCar
-                key={searchedCar.id}
-                {...searchedCar}
-              />
+              <GridItemCar key={searchedCar.id} {...searchedCar} />
             )}
           </div>
         </div>

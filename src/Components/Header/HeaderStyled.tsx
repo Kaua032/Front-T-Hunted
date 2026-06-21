@@ -21,7 +21,6 @@ export const HeaderStyled = styled.header`
   }
 
   div {
-    width: 200px;
 
     display: flex;
     align-items: center;
@@ -36,8 +35,21 @@ export const HeaderStyled = styled.header`
     width: 40px;
     height: 40px;
   }
-`;
 
+  div button {
+    width: 25px;
+    height: 25px;
+    background-image: url("./logout.png");
+
+    background-color: transparent;
+    border: none;
+
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+`;
 
 export const SearchContainerStyled = styled.form`
   position: relative;
@@ -47,10 +59,10 @@ export const SearchContainerStyled = styled.form`
   input {
     height: 30px;
     width: 400px;
-    padding: 10px 40px 10px 15px; 
+    padding: 10px 40px 10px 15px;
     border-radius: 100px;
     border: none;
-    outline: none; 
+    outline: none;
   }
 
   input::placeholder {
@@ -61,8 +73,8 @@ export const SearchContainerStyled = styled.form`
   }
 
   button {
-    position: absolute; 
-    right: 15px; 
+    position: absolute;
+    right: 15px;
     background: transparent;
     border: none;
     cursor: pointer;
