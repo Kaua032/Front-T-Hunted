@@ -21,18 +21,32 @@ export const RegisterDivStyled = styled.div`
   background: white;
   border-radius: 10px;
 
+  max-height: 80vh;
   width: 1120px;
 
   img {
     width: 400px;
     border-radius: 10px 0px 0px 10px;
   }
+
+  @media (max-width: 1250px) {
+    width: 80%;
+    img {
+      width: 40%;
+    }
+  }
+  @media (max-width: 730px){
+    width: 80%;
+   img{
+    display: none;
+   } 
+  }
 `;
 
 export const RegisterFormDivStyled = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
 
   width: 720px;
@@ -54,7 +68,7 @@ export const RegisterFormDivStyled = styled.div`
 
   form .inputTitle {
     color: #5e5d5d;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
   }
 
@@ -68,13 +82,31 @@ export const RegisterFormDivStyled = styled.div`
     margin-top: 10px;
     margin-bottom: 5px;
 
-    color: #5E5D5D;
+    color: #5e5d5d;
     font-weight: 600;
     font-size: 10px;
   }
 
-  form div #navigate_register a{
-    color: #2699EA;
+  form div #navigate_register a {
+    color: #2699ea;
     text-decoration: none;
   }
+
+  @media (max-width: 900px) {
+    h2 {
+      font-size: 20px;
+    }
+
+  }
+
+  @media (max-width: 730px){
+    width: 100%;
+
+    padding: 40px 0px 50px 0px;
+    form{
+      gap: 10px;
+    }
+  }
+
+
 `;
