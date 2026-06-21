@@ -22,3 +22,20 @@ export function getCollection() {
 
   return response;
 }
+
+export function updateQuantity({ collectionId, quantity }) {
+  const response = axios.patch(
+    `${baseURL}/collections/${collectionId}/quantity`,
+    {
+      quantity: quantity,
+    },
+
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    },
+  );
+
+  return response;
+}
