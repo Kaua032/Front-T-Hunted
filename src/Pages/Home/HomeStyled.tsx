@@ -15,7 +15,7 @@ export const BackgroundHomeStyled = styled.div`
     align-items: center;
   }
 
-  #results_layout #chosse_layout {
+  #results_layout #choose_layout {
     width: 650px;
     display: flex;
     justify-content: flex-end;
