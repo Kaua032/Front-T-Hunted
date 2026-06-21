@@ -29,6 +29,7 @@ export const ListItemCarCollectionStyled = styled.div`
   }
   .imgCarCollection img {
     max-width: 100px;
+    max-height: 100px;
     border-radius: 10px 0px 0px 10px;
   }
 

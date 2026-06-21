@@ -28,6 +28,7 @@ export const GridItemCarCollectionStyled = styled.div`
   }
   .imgCarCollection img {
     max-width: 100px;
+    max-height: 100px;
   }
 
   .layout_card{
