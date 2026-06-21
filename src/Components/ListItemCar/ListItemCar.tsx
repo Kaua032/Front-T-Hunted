@@ -75,6 +75,8 @@ function ListItemCar({
 
       const responseCollection = await createCollection(bodyCollection)
 
+      setQuantity(0);
+
       if(responseCollection.status === 201){
         alert("Carro adicionado a coleção com sucesso!");
       }
@@ -131,6 +133,9 @@ function ListItemCar({
               step="0.01"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              style={{
+                width: `${Math.max(String(price).length, 4)}ch`
+              }}
             />
           </div>
 
