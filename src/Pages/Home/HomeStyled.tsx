@@ -103,22 +103,22 @@ export const BackgroundHomeStyled = styled.div`
     padding: 25px 0px 0px 15px;
   }
 
-  #your_collection #cards .cards .card_layout_2 img{
+  #your_collection #cards .cards .card_layout_2 img {
     width: 60px;
   }
 
-  .card_value{
+  .card_value {
     font-size: 48px;
     color: #5e5d5d;
     font-weight: 500;
   }
 
-  #part2_rare_piece{
+  #part2_rare_piece {
     display: flex;
     gap: 30px;
   }
 
-  #choose_layout_collection{
+  #choose_layout_collection {
     width: 650px;
     display: flex;
     gap: 20px;
@@ -137,7 +137,7 @@ export const BackgroundHomeStyled = styled.div`
 
     &.list {
       flex-direction: column;
-      align-items: center; 
+      align-items: center;
     }
 
     &.grid {

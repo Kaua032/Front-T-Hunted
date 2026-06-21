@@ -33,7 +33,6 @@ function Home() {
       try {
         const response = await getCollection();
         setMyCollection(response.data);
-        console.log("Coleção carregada com sucesso!", response.data);
       } catch (error: any) {
         console.error(
           "Erro ao carregar a coleção:",

@@ -21,6 +21,18 @@ function GridItemCarCollection({
   const [serverError, setServerError] = useState("");
   const [quantity, setQuantity] = useState(collection_quantity || 1);
 
+  // 1. Definimos a cotação
+  const COTACAO_DOLAR = 5.14;
+
+  // 2. Convertendo e formatando os valores para Real
+  const valorPagoBRL = (Number(purchase_price) * COTACAO_DOLAR)
+    .toFixed(2)
+    .replace(".", ",");
+
+  const valorMercadoBRL = (Number(averagePrice) * COTACAO_DOLAR)
+    .toFixed(2)
+    .replace(".", ",");
+
   async function handleMinus() {
     if (quantity > 1) {
       const novaQuantidade = quantity - 1;
@@ -94,10 +106,10 @@ function GridItemCarCollection({
                   : "#dc3545",
             }}
           >
-            R${purchase_price}
+            R$ {valorPagoBRL}
           </p>
 
-          <p className="average">R${averagePrice}</p>
+          <p className="average">R$ {valorMercadoBRL}</p>
         </div>
       </div>
     </GridItemCarCollectionStyled>

@@ -32,13 +32,14 @@ export const GridItemCarCollectionStyled = styled.div`
 
   .layout_card{
     display: flex;
+    justify-content: space-between;
 
     padding: 17px 10px 10px 10px;
   }
 
   .name_quantity h3 {
     color: #5e5d5d;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
   }
   .name_quantity p {
@@ -95,7 +96,7 @@ export const GridItemCarCollectionStyled = styled.div`
 
   .prices .purchase, .prices .average{
     color: #5e5d5d;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
   }
 `;
