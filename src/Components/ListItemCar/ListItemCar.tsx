@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { ListItemCarStyled } from "./ListItemCarStyled";
 import Button from "../../Components/Button/Button";
 
-import { createCar, searchCarByInfo  } from "../../services/carService";
-import { createCollection} from "../../services/collectionService"
+import { createCar, searchCarByInfo } from "../../services/carService";
+import { createCollection } from "../../services/collectionService";
 
 function ListItemCar({
   id,
@@ -21,6 +23,8 @@ function ListItemCar({
   const [quantity, setQuantity] = useState(0);
 
   const [price, setPrice] = useState((averagePrice * 5.14).toFixed(2));
+
+  const navigate = useNavigate();
 
   function handleMinus() {
     if (quantity > 0) {
@@ -57,10 +61,11 @@ function ListItemCar({
 
       console.log("Carro Criado com sucesso.");
     } catch (error: any) {
-        if (error.response?.status === 409) {
+      if (error.response?.status === 409) {
         console.log("O carro já existe no banco de dados. Pulando criação...");
       } else {
-        const errorMessage = error.response?.data?.message || "Erro ao criar o carro.";
+        const errorMessage =
+          error.response?.data?.message || "Erro ao criar o carro.";
         setServerError(errorMessage);
         console.error(error);
         return;
@@ -68,24 +73,21 @@ function ListItemCar({
     }
 
     try {
-      const existsCar = await searchCarByInfo({toyNumber})
+      const existsCar = await searchCarByInfo({ toyNumber });
       const carId = existsCar.data.data[0].id;
 
       bodyCollection.carId = carId;
 
-      const responseCollection = await createCollection(bodyCollection)
+      const responseCollection = await createCollection(bodyCollection);
 
       setQuantity(0);
 
-      if(responseCollection.status === 201){
-        alert("Carro adicionado a coleção com sucesso!");
+      if (responseCollection.status === 201) {
+        navigate(0);
       }
-
-    }catch(error: any){
+    } catch (error: any) {
       console.log(error.message);
     }
-
-
   }
 
   return (
@@ -134,7 +136,7 @@ function ListItemCar({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               style={{
-                width: `${Math.max(String(price).length, 4)}ch`
+                width: `${Math.max(String(price).length, 4)}ch`,
               }}
             />
           </div>

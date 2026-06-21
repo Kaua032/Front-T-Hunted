@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../../Components/Button/Button";
 import { GridItemcarStyled } from "./GridItemCarStyled";
@@ -22,6 +23,8 @@ function GridItemCar({
   const [quantity, setQuantity] = useState(0);
 
   const [price, setPrice] = useState((averagePrice * 5.14).toFixed(2));
+  
+  const navigate = useNavigate();
 
   function handleMinus() {
     if (quantity > 0) {
@@ -50,12 +53,11 @@ function GridItemCar({
     const bodyCollection = {
       condition: "carded",
       quantity,
-      purchase_price: Number((price / 5.14).toFixed(2)),
+      purchase_price: Number((Number(price) / 5.14).toFixed(2)), // Corrigido para garantir que 'price' seja lido como número na divisão
     };
 
     try {
       await createCar(bodyCar);
-
       console.log("Carro Criado com sucesso.");
     } catch (error: any) {
       if (error.response?.status === 409) {
@@ -80,7 +82,8 @@ function GridItemCar({
       setQuantity(0);
 
       if (responseCollection.status === 201) {
-        alert("Carro adicionado a coleção com sucesso!");
+
+        navigate(0); 
       }
     } catch (error: any) {
       console.log(error.message);
