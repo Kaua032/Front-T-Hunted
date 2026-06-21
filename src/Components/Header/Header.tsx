@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeaderStyled, SearchContainerStyled } from "./HeaderStyled";
 import { Link } from "react-router-dom";
 import { searchCar } from "../../services/carService";
@@ -10,17 +10,27 @@ interface HeaderProps {
 function Header({ onCarFound }: HeaderProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  async function handleSearch(e: React.FormEvent) {
-    e.preventDefault();
-    if (!searchTerm.trim()) return;
-
-    try {
-      const response = await searchCar(searchTerm);
-
-      onCarFound(response.data);
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      onCarFound(null);
+      return;
     }
+
+    const delayDebounceFn = setTimeout(async () => {
+      try {
+        const response = await searchCar(searchTerm);
+        onCarFound(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+    
+  }, [searchTerm, onCarFound]);
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
   }
 
   return (
@@ -33,7 +43,7 @@ function Header({ onCarFound }: HeaderProps) {
         <input
           placeholder="Pesquisar..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)} 
         />
         <button type="submit">
           <img src="Search_icon.png" alt="Pesquisar" className="search-icon" />
