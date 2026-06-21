@@ -183,9 +183,15 @@ function Home() {
 
           <div id="results">
             {layoutMode === "list" ? (
-              <ListItemCar {...searchedCar} />
+              <ListItemCar
+                key={searchedCar.id}
+                {...searchedCar}
+              />
             ) : (
-              <GridItemCar {...searchedCar} />
+              <GridItemCar
+                key={searchedCar.id}
+                {...searchedCar}
+              />
             )}
           </div>
         </div>
