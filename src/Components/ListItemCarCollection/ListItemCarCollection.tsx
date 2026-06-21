@@ -21,6 +21,16 @@ function ListItemCarCollection({
   const [serverError, setServerError] = useState("");
   const [quantity, setQuantity] = useState(collection_quantity || 1);
 
+  const COTACAO_DOLAR = 5.14;
+
+  const valorPagoBRL = (Number(purchase_price) * COTACAO_DOLAR)
+    .toFixed(2)
+    .replace(".", ",");
+
+  const valorMercadoBRL = (Number(averagePrice) * COTACAO_DOLAR)
+    .toFixed(2)
+    .replace(".", ",");
+
   async function handleMinus() {
     if (quantity > 1) {
       const novaQuantidade = quantity - 1;
@@ -87,6 +97,7 @@ function ListItemCarCollection({
         <div className="prices">
           <p
             className="purchase"
+            title={`Valor pago: R$ ${valorPagoBRL}`}
             style={{
               color:
                 Number(purchase_price) <= Number(averagePrice)
@@ -94,10 +105,15 @@ function ListItemCarCollection({
                   : "#dc3545",
             }}
           >
-            R${purchase_price}
+            R$ {valorPagoBRL}
           </p>
 
-          <p className="average">R${averagePrice}</p>
+          <p
+            className="average"
+            title={`Valor de mercado: R$ ${valorMercadoBRL}`}
+          >
+            R$ {valorMercadoBRL}
+          </p>
         </div>
       </div>
     </ListItemCarCollectionStyled>

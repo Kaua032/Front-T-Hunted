@@ -3,7 +3,6 @@ import { HeaderStyled, SearchContainerStyled } from "./HeaderStyled";
 import { Link } from "react-router-dom";
 import { searchCar } from "../../services/carService";
 
-// Importações para ler o token (Descomente se for usar a Opção 2)
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { decode } from "zod";
@@ -70,7 +69,6 @@ function Header({ onCarFound }: HeaderProps) {
       </SearchContainerStyled>
 
       <div className="profile-container">
-        {/* 3. Trocamos o texto fixo pela variável de estado */}
         <p>{userName}</p>
         <img src="Profile.png" alt="Foto de perfil" />
       </div>
