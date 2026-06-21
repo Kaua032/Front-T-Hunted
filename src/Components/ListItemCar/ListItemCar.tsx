@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { ListItemCarStyled } from "./ListItemCarStyled";
 import Button from "../../Components/Button/Button";
-import { createCar } from "../../services/carService";
+
+import { createCar, searchCarByInfo  } from "../../services/carService";
+import { createCollection} from "../../services/collectionService"
 
 function ListItemCar({
   id,
@@ -45,26 +47,43 @@ function ListItemCar({
     };
 
     const bodyCollection = {
-      toyNumber,
+      condition: "carded",
       quantity,
       purchase_price: Number((price / 5.14).toFixed(2)),
     };
 
-    console.log("Body 1 (Carro):", bodyCar);
-    console.log("Body 2 (Coleção):", bodyCollection);
+    try {
+      await createCar(bodyCar);
+
+      console.log("Carro Criado com sucesso.");
+    } catch (error: any) {
+        if (error.response?.status === 409) {
+        console.log("O carro já existe no banco de dados. Pulando criação...");
+      } else {
+        const errorMessage = error.response?.data?.message || "Erro ao criar o carro.";
+        setServerError(errorMessage);
+        console.error(error);
+        return;
+      }
+    }
 
     try {
-      const responseCar = await createCar(bodyCar);
-      console.log(responseCar);
+      const existsCar = await searchCarByInfo({toyNumber})
+      const carId = existsCar.data.data[0].id;
 
-      console.log("Sucesso! As duas requisições foram feitas.");
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message ||
-        "Erro ao criar o carro ou adicionar na coleção";
-      setServerError(errorMessage);
-      console.error(error);
+      bodyCollection.carId = carId;
+
+      const responseCollection = await createCollection(bodyCollection)
+
+      if(responseCollection.status === 201){
+        alert("Carro adicionado a coleção com sucesso!");
+      }
+
+    }catch(error: any){
+      console.log(error.message);
     }
+
+
   }
 
   return (
